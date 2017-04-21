@@ -1,0 +1,38 @@
+[Unit]
+Description=High-performance, schema-free document-oriented database
+After=network.target
+Documentation=https://docs.mongodb.org/manual
+
+[Service]
+User=mongodb
+Group=mongodb
+ExecStart=/usr/bin/mongod --quiet --config /etc/mongod.conf
+
+
+#unlimited power
+LimitCPU=infinity
+LimitFSIZE=infinity
+LimitDATA=infinity
+LimitSTACK=infinity
+LimitCORE=infinity
+LimitRSS=infinity
+LimitNOFILE=infinity
+LimitAS=infinity
+LimitNPROC=infinity
+LimitMEMLOCK=infinity
+LimitLOCKS=infinity
+LimitSIGPENDING=infinity
+LimitMSGQUEUE=infinity
+LimitNICE=infinity
+LimitRTPRIO=infinity
+
+
+# total threads (user+kernel)
+TasksMax=infinity
+TasksAccounting=false
+
+# Recommended limits for for mongod as specified in
+# http://docs.mongodb.org/manual/reference/ulimit/#recommended-settings
+
+[Install]
+WantedBy=multi-user.target

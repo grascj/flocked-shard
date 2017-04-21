@@ -1,0 +1,31 @@
+---
+- hosts: armada
+
+  gather_facts: False
+
+  become: yes
+
+  tasks:
+        - name: INSTALL PYTHON2
+          raw: sudo apt-get update
+
+
+        - name: INSTALL PYTHON2
+          raw: sudo apt-get -y install python-minimal
+
+
+        - name: CLONING REPO
+          git: 
+                repo: https://github.com/grascj/flocked-shard.git 
+                dest: /home/ubuntu/
+                accept_hostkey: true 
+                force: yes
+
+
+        - name: MOVING CONF FILE
+          command: mv /home/ubuntu/flocked-shard/mongod.service /lib/systemd/system/mongod.service
+
+
+        - name: RESTARTING Mongod
+          systemd: daemon_reload=yes state=restarted name=mongod
+
